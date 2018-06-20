@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<packaging>pom</packaging>
+
+	<name>${artifactId}-parent</name>
+	<description>Prototype spring-boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.1.RELEASE</version>
+		<!-- <relativePath/> lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<!-- CUSTOM -->
+		<unit.test.skip>false</unit.test.skip>
+		<acceptance.test.skip>true</acceptance.test.skip>
+		<version.mapstruct>1.2.0.Final</version.mapstruct>
+		<quartz.version>2.3.0</quartz.version>
+		<!-- util -->
+		<commons.collections.version>4.1</commons.collections.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-io.version>2.6</commons-io.version>
+		<swagger.version>2.8.0</swagger.version>
+		<oauth.version>2.2.1.RELEASE</oauth.version>
+		<jwt.version>1.0.9.RELEASE</jwt.version>
+		<jbehave.version>4.3.2</jbehave.version><!-- 4.1.1 -->
+		<jbehave.resource.version>3.3.1</jbehave.resource.version><!-- 3.3.1 -->
+		<serenity.jbehave.version>1.40.0</serenity.jbehave.version><!-- 1.5.0 -->
+		<serenity.version>1.9.17</serenity.version><!-- 1.1.22-rc.11 -->
+		<serenity.core.version>1.9.17</serenity.core.version><!-- 1.0.47 -->
+		<springfox.swagger2.version>2.8.0</springfox.swagger2.version>
+		<opencv.version>3.2.0-1</opencv.version>
+		<thymeleaf.tiles2.version>2.1.1.RELEASE</thymeleaf.tiles2.version>
+		<thymeleaf.expressions.version>1.1.3</thymeleaf.expressions.version>
+		<jasypt.version>1.9.3-SNAPSHOT</jasypt.version><!-- 1.9.2 -->
+		<jasypt.spring.boot.version>2.0.0</jasypt.spring.boot.version><!-- 2.0.1-SNAPSHOT -->
+		<!-- <crypteron.version>2017.7.1.2</crypteron.version>2018.1.1.0 2017.7.1.3 -->
+		<!-- <resource.delimiter>@</resource.delimiter> -->
+		<webjars.bootstrap.version>4.1.0</webjars.bootstrap.version>
+		<webjars.jquery.version>3.3.1-1</webjars.jquery.version>
+		<webjars.fontawesome.version>5.0.13</webjars.fontawesome.version>
+		<!-- <main.basedir>${project.basedir}</main.basedir> -->
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- MAPSTRUCT (mapstruct-jdk8) -->
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct-jdk8</artifactId>
+				<version>${version.mapstruct}</version>
+			</dependency>
+
+			<!-- QUARTZ -->
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>${quartz.version}</version>
+			</dependency>
+			<!-- SECURITY -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-jwt</artifactId>
+				<version>${jwt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+				<version>${oauth.version}</version>
+			</dependency>
+
+			<!-- swagger -->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${springfox.swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${springfox.swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.openpnp</groupId>
+				<artifactId>opencv</artifactId>
+				<version>${opencv.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- VIEW -->
+			<!-- <dependency> -->
+			<!-- <groupId>org.thymeleaf</groupId> -->
+			<!-- <artifactId>thymeleaf</artifactId> -->
+			<!-- </dependency> -->
+			<!-- <dependency> -->
+			<!-- <groupId>com.github.mxab.thymeleaf.extras</groupId> -->
+			<!-- <artifactId>thymeleaf-extras-data-attribute</artifactId> -->
+			<!-- </dependency> -->
+			<!-- <dependency> -->
+			<!-- <groupId>org.thymeleaf.extras</groupId> -->
+			<!-- <artifactId>thymeleaf-extras-java8time</artifactId> -->
+			<!-- </dependency> -->
+			<!-- <dependency> -->
+			<!-- <groupId>nz.net.ultraq.thymeleaf</groupId> -->
+			<!-- <artifactId>thymeleaf-layout-dialect</artifactId> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>org.thymeleaf.extras</groupId>
+				<artifactId>thymeleaf-extras-tiles2-spring4</artifactId>
+				<version>${thymeleaf.tiles2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>nz.net.ultraq.thymeleaf</groupId>
+				<artifactId>thymeleaf-expression-processor</artifactId>
+				<version>${thymeleaf.expressions.version}</version>
+			</dependency>
+			<!-- COMMONS -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${commons.collections.version}</version>
+			</dependency>
+			<!-- ENCRYPTAGE/DECRYPTAGE -->
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt</artifactId>
+				<version>${jasypt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt-hibernate5</artifactId>
+				<version>${jasypt.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-spring-boot</artifactId>
+				<version>${jasypt.spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-spring-boot-starter</artifactId>
+				<version>${jasypt.spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-hikaricp</artifactId>
+				<version>${hibernate.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>com.crypteron</groupId> -->
+			<!-- <artifactId>cipherdb-agent-hibernate5</artifactId> -->
+			<!-- <exclusions> -->
+			<!-- <exclusion> -->
+			<!-- <groupId>org.hibernate</groupId> -->
+			<!-- <artifactId>hibernate-entitymanager</artifactId> -->
+			<!-- </exclusion> -->
+			<!-- </exclusions> -->
+			<!-- <version>${crypteron.version}</version> -->
+			<!-- </dependency> -->
+
+			<!-- WEBJARS -->
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>bootstrap</artifactId>
+				<version>${webjars.bootstrap.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>font-awesome</artifactId>
+				<version>${webjars.fontawesome.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>jquery</artifactId>
+				<version>${webjars.jquery.version}</version>
+			</dependency>
+			
+			<!-- BDD JBehave -->
+			<dependency>
+				<groupId>org.jbehave</groupId>
+				<artifactId>jbehave-core</artifactId>
+				<version>${jbehave.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jbehave</groupId>
+				<artifactId>jbehave-spring</artifactId>
+				<version>${jbehave.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jbehave.site</groupId>
+				<artifactId>jbehave-site-resources</artifactId>
+				<version>${jbehave.resource.version}</version>
+				<type>zip</type>
+				<scope>test</scope>
+			</dependency>
+			<!-- serenity -->
+			<dependency>
+				<groupId>net.serenity-bdd</groupId>
+				<artifactId>serenity-jbehave</artifactId>
+				<version>${serenity.jbehave.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>net.serenity-bdd</groupId>
+				<artifactId>serenity-spring</artifactId>
+				<version>${serenity.core.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>net.serenity-bdd</groupId>
+				<artifactId>serenity-junit</artifactId>
+				<version>${serenity.core.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>net.serenity-bdd</groupId>
+				<artifactId>serenity-core</artifactId>
+				<version>${serenity.core.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.serenity-bdd</groupId>
+				<artifactId>serenity-reports</artifactId>
+				<version>${serenity.core.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>net.serenity-bdd</groupId>
+				<artifactId>serenity-rest-assured</artifactId>
+				<version>${serenity.core.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-core</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>java-hamcrest</artifactId>
+				<version>2.0.0.0</version>
+				<scope>test</scope>
+			</dependency>
+		
+			<dependency>
+				<groupId>io.rest-assured</groupId>
+				<artifactId>spring-mock-mvc</artifactId>
+				<version>3.1.0</version>
+				<scope>test</scope>
+			</dependency>
+			
+
+		</dependencies>
+
+
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.tomcat</groupId>
+					<artifactId>tomcat-jdbc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator-autoconfigure</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-jdk8</artifactId>
+		</dependency>
+		<!-- QUARTZ -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!-- SECURITY -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.59</version>
+		</dependency>
+		<!-- thucydides -->
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-jbehave</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openpnp</groupId>
+			<artifactId>opencv</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-reports</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-rest-assured</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jbehave</groupId>
+			<artifactId>jbehave-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jbehave.site</groupId>
+			<artifactId>jbehave-site-resources</artifactId>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>java-hamcrest</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax.el</groupId>
+		    <artifactId>javax.el-api</artifactId>
+		    <version>3.0.0</version>
+		    <scope>test</scope>
+		</dependency>
+
+		<!-- ENCRYPTION -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.github.ulisesbocchio</groupId> -->
+<!-- 			<artifactId>jasypt-spring-boot</artifactId> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.crypteron</groupId> -->
+		<!-- <artifactId>cipherdb-agent-hibernate5</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- HTTP COMPONENTS -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpasyncclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>fluent-hc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+
+	<build>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven-release-plugin.version}</version>
+					<configuration>
+						<goals>deploy</goals>
+						<autoversionsubmodules>true</autoversionsubmodules>
+					</configuration>
+				</plugin>
+	            <plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-war-plugin</artifactId>
+<!-- 	                <version>2.4</version> -->
+	                <configuration>
+	                    <attachClasses>true</attachClasses>
+	                </configuration>
+	            </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<showWarnings>true</showWarnings>
+						<optimize>true</optimize>
+						<showDeprecation>true</showDeprecation>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.mapstruct</groupId>
+								<artifactId>mapstruct-processor</artifactId>
+								<version>${version.mapstruct}</version>
+							</path>
+						</annotationProcessorPaths>
+<!-- 						<compilerArgs> -->
+<!-- 							<compilerArg> -->
+<!-- 								-Amapstruct.suppressGeneratorTimestamp=true -->
+<!-- 							</compilerArg> -->
+<!-- 							<compilerArg> -->
+<!-- 								-Amapstruct.suppressGeneratorVersionInfoComment=true -->
+<!-- 							</compilerArg> -->
+<!-- 						</compilerArgs> -->
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<skip>${unit.test.skip}</skip>
+						<includes>
+							<include>**/*Test.java</include>
+						</includes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>net.serenity-bdd.maven.plugins</groupId>
+					<artifactId>serenity-maven-plugin</artifactId>
+					<version>1.9.16</version><!-- 1.5.3 , 1.1.24 -->
+					<dependencies>
+						<dependency>
+							<groupId>net.serenity-bdd</groupId>
+							<artifactId>serenity-core</artifactId>
+							<version>${serenity.core.version}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>serenity-reports</id>
+							<phase>post-integration-test</phase>
+							<goals>
+								<goal>aggregate</goal>
+							</goals>
+						</execution>
+						
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>net.serenity-bdd.maven.plugins</groupId>
+				<artifactId>serenity-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+
+		<!-- <resources> -->
+		<!-- <resource> -->
+		<!-- <directory>src/main/resources</directory> -->
+		<!-- <filtering>true</filtering> -->
+		<!-- </resource> -->
+		<!-- </resources> -->
+
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<spring.active.profile>dev</spring.active.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>qualif</id>
+			<properties>
+				<spring.active.profile>qualif</spring.active.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.active.profile>prod</spring.active.profile>
+				<unit.test.skip>true</unit.test.skip>
+			</properties>
+		</profile>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.active.profile>local</spring.active.profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>acceptance-test</id>
+			<properties>
+				<spring.active.profile>acceptance-test</spring.active.profile>
+				<acceptance.test.skip>false</acceptance.test.skip>
+				<unit.test.skip>true</unit.test.skip>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev-acceptance-test</id>
+			<properties>
+				<spring.active.profile>acceptance-test</spring.active.profile>
+				<acceptance.test.skip>false</acceptance.test.skip>
+				<unit.test.skip>false</unit.test.skip>
+			</properties>
+		</profile>
+	</profiles>
+</project>

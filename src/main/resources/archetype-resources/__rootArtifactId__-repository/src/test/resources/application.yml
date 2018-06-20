@@ -1,0 +1,51 @@
+spring:
+  #database configuration
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ENC(qXHHVp8oEz/rKZGtnDBM8Yudjq7ZsF5u) #postgres
+    driver-class-name: org.h2.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      maximum-pool-size: 20
+      minimum-idle: 10
+      pool-name: HikariPool
+      idle-timeout: 10000
+      data-source-properties:
+        hibernate.show_sql: true
+        database.stmt.cache.stmt: true
+        database.stmt.cache.size: 250
+        database.stmt.cache.sql.limit: 2048
+        database.stmt.use.server: true
+        hibernate.jdbc.lob.non_contextual_creation: false
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    password: p@ssw0rd
+
+
+application:
+
+  #bdd encryptor : PBEWithMD5AndTripleDES, >>PBEWITHSHA256AND128BITAES-CBC-BC (bouncy castle)
+  bdd-encryptor:
+    algorithm: ENC(2uBb/AmWVUhAbT6H+6wLicroCtfidyeMOg6pO/yVNjJFXg/RPxJAeFFg3pgLm2at) #PBEWITHSHA256AND128BITAES-CBC-BC
+    password: ENC(BzPg4MpcyHKyfjcCXsXxn4brrm7zHAR1) #3t3ch_p@ssW0rd
+    pool-size: 20
+  #localisation
+  i18n:
+    dir:
+      page: classpath:message/pages
+      control: classpath:message/controls
+      message: classpath:message/messages
+      http-error: classpath:message/httperrors
+  #token
+  oauth2:
+    jwt:
+      jks-file: __security__/prototypekeys.jks
+      password: 123456
+      alias: prototypekeys
+      public-key: __security__/prototypekeys.pbk
+    client:
+      client-id: prototype-client
+      secret-key: $2a$10$MtgDhalQE/BS./FMZkWVCe3huet/iogZeJe0RhhRE3N7NaPukqcA2 #prototype-client

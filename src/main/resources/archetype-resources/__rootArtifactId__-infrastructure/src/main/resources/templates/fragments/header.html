@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{css/bootstrap.min.css}"/>
+    <link href="../../../static/css/fa-svg-with-js.css" rel="stylesheet" media="screen" th:href="@{css/fa-svg-with-js.css}"/>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <strong>
+            	<a class="navbar-brand" href="#" th:text="#{application.title}">Demo project</a>
+            </strong>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#" th:href="@{/}" th:text="#{menu.home.text}">Home</a></li>
+                <li><a href="#about" th:text="#{menu.about.text}">About</a></li>
+                <li><a href="#contact" th:text="#{menu.contact.text}">Contact</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')"><a href="#contact" th:text="#{menu.user.text}">[user]</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#contact" th:text="#{menu.admin.text}">[admin]</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAnonymous()">
+                    <a href="/signin" th:href="@{/signin}">
+                        <span class="fas fa-sign-in-alt glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;<span th:text="#{button.signin.text}" th:remove="tag">Sign in</span>
+                    </a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                	<a href="#" onclick="return false;">
+                		<span sec:authentication="name" th:remove="tag">Username</span>&nbsp;
+                	</a>
+                </li>
+                <li sec:authorize="isAuthenticated()"> 
+                    <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                        <span class="fas fa-sign-out-alt glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;<span th:text="#{button.logout.text}" th:remove="tag">Logout</span>
+                    </a>
+                    <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+</body>
+</html>

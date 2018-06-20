@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{page.home.title}">Welcome!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{resources/css/bootstrap.min.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{resources/css/core.css}" />
+    <link href="../../static/css/lobibox/Lobibox.min.css" rel="stylesheet" media="screen" th:href="@{resources/css/lobibox/Lobibox.min.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: header">[Header ..]</div>
+<div class="container">
+    <!-- /* Handle the flash message */-->
+    <th:block th:if="${message != null}">
+        <!-- /* The message code is returned from the @Controller */ -->
+        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
+ 	</th:block>
+    <p class="lead" th:text="#{home.welcome.message}">
+        Welcome to the Spring MVC + Thymeleaf
+    </p>
+    <p>
+    	<h1 th:text="${messageController}"/> <br/>
+    	<strong>Test sur 'Conversion Service' Spring:</strong><br/> 
+       	Date Creation : <span th:text="${{formatterDto.dateCreation}}" th:remove="tag">2015/05/15</span><br/>
+       	Date Fin : <span th:text="${{formatterDto.dateLimite}}" th:remove="tag">2015/08/15</span>
+    </p>
+</div>
+<div th:replace="fragments/footer :: footer">&copy; 2015 The Static Templates</div>
+
+	<script src="../../static/js/jquery.1.11.min.js" th:src="@{resources/js/jquery.1.11.min.js}"></script>
+	<script src="../../static/js/bootstrap.min.js" th:src="@{resources/js/bootstrap.min.js}"></script>
+	<script src="../../static/js/lobibox/lobibox.min.js" th:src="@{resources/js/lobibox/lobibox.min.js}"></script>
+	<script src="../../static/js/lobibox/messageboxes.min.js" th:src="@{resources/js/lobibox/messageboxes.min.js}"></script>
+	<script src="../../static/js/lobibox/notifications.min.js" th:src="@{resources/js/lobibox/notifications.min.js}"></script>
+	
+</body>
+</html>

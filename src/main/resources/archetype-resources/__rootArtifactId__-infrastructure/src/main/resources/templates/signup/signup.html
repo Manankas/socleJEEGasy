@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{page.signup.title}">Signup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{css/bootstrap.min.css}"/>
+    <link href="../../../static/css/fa-svg-with-js.css" rel="stylesheet" media="screen" th:href="@{css/fa-svg-with-js.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{css/core.css}" />
+</head>
+<body>
+
+	<form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}">
+	    <!--/* Show general error message when form contains errors */-->
+	    <th:block th:if="${#fields.hasErrors('${signupForm.*}')}">
+	        <div th:replace="fragments/alert :: alert (type='danger', message='__#{signup.error}__')">Alert</div>
+	    </th:block>
+	    <fieldset>
+	        <legend th:text="#{form.signup.legend}">Please Sign Up</legend>
+	        <div class="form-group" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+	            <label for="username" class="col-lg-2 control-label" th:text="#{label.login.text}">Login</label>
+	            <div class="col-lg-10">
+	                <input type="text" class="form-control" id="username" th:placeholder="#{label.login.text}" placeholder="Username" th:field="*{username}" />
+	                <span class="help-block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect username</span>
+	            </div>
+	        </div>
+	        <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+	            <label for="email" class="col-lg-2 control-label" th:text="#{label.email.text}">Login</label>
+	            <div class="col-lg-10">
+	                <input type="text" class="form-control" id="email" th:placeholder="#{label.email.text}" placeholder="Email" th:field="*{email}" />
+	                <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</span>
+	            </div>
+	        </div>
+	        <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+	            <label for="password" class="col-lg-2 control-label" th:text="#{label.password.text}">Password</label>
+	            <div class="col-lg-10">
+	                <input type="password" class="form-control" id="password" th:placeholder="#{label.password.text}" placeholder="Password" th:field="*{password}"/>
+	                <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
+	            </div>
+	        </div>
+	        <div class="form-group" th:classappend="${#fields.hasErrors('passwordVerify')}? 'has-error'">
+	            <label for="passwordVerify" class="col-lg-2 control-label" th:text="#{label.password.text}">Password</label>
+	            <div class="col-lg-10">
+	                <input type="password" class="form-control" id="passwordVerify" th:placeholder="#{label.passwordVerify.text}" placeholder="Retape password" th:field="*{passwordVerify}"/>
+	                <span class="help-block" th:if="${#fields.hasErrors('passwordVerify')}" th:errors="*{passwordVerify}">Retape password</span>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <div class="col-lg-offset-2 col-lg-10">
+	                <button type="submit" class="btn btn-default" th:text="#{button.signup.text}">Sign up</button>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <div class="col-lg-offset-2 col-lg-10">
+	                <p><span th:text="#{label.have.account}" th:remove="tag">Already have an account?</span> <a href="signin" th:href="@{/signin}" th:text="#{button.signin.text}">Sign In</a></p>
+	            </div>
+	        </div>
+	    </fieldset>
+	</form>
+
+	<script src="../../static/js/jquery.1.11.min.js" th:src="@{js/jquery.1.11.min.js}"></script>
+	<script src="../../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+	<script src="../../../static/js/fontawesome.min.js" th:src="@{js/fontawesome.min.js}"></script>
+	
+</body>
+</html>

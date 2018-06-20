@@ -1,0 +1,13 @@
+application:
+
+  #data generation    
+  production:
+    mode: false
+#  database:
+#    generate:
+#      data: true
+#    file:
+#      user: classpath:data/default_user.txt
+  default:
+    locale: fr
+    encoding: utf8

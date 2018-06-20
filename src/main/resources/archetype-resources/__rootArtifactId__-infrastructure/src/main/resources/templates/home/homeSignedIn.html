@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="fragments/layouts/default-decorator" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{page.home.title}">Welcome!</title>
+    <!--/*--> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}" />
+    <link href="../../static/css/lobibox/Lobibox.min.css" rel="stylesheet" media="screen" th:href="@{/css/lobibox/Lobibox.min.css}" />
+    <!--*/--> 
+</head>
+<body>
+	<!--/*--> 
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	    <div class="container">
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <strong>
+	            	<a class="navbar-brand" href="#" th:text="#{application.title}">Demo project</a>
+	            </strong>
+	        </div>
+	    </div>
+	</div>
+	<!--*/--> 
+	
+	<!-- DEBUT CONTENT -->
+	<div class="container"  layout:fragment="body-content" th:remove="tag">
+	
+	    <!-- /* Handle the flash message */-->
+	    <th:block th:if="${message != null}">
+	        <!-- /* The message code is returned from the @Controller */ -->
+	        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>
+	 	</th:block>
+	    <p class="lead" th:text="#{home.welcome.message}">
+	        Welcome to the Spring MVC + Thymeleaf
+	    </p>
+	    <p>
+	    	<h1 th:text="${messageController}"/> <br/>
+	    	<strong>Test sur 'Conversion Service' Spring:</strong><br/> 
+	       	Date Creation : <th:block th:text="${{formatterDto.dateCreation}}" th:remove="tag">2015/05/15</th:block><br/>
+	       	Date Fin : <span th:text="${{formatterDto.dateLimite}}" th:remove="tag">2015/08/15</span>
+	    </p>
+	    
+	    <p>
+	    	<strong>Notification</strong><br/>
+	        <a id="btnInfo" href="#" class="btn btn-info btn-lg">Info</a>
+	        <a id="btnSuccess" href="#" class="btn btn-success btn-lg">Success</a>
+	        <a id="btnWarning" href="#" class="btn btn-warning btn-lg">Warning</a>
+	        <a id="btnError" href="#" class="btn btn-danger btn-lg">Error</a>
+	    </p>
+	    
+	</div>
+	<!-- FIN CONTENT -->
+	
+	<!--/*--> 
+    <div th:fragment="footer" th:align="center">
+        &copy; 2016 Footer - <span th:text="#{page.footer.version(${@environment.getProperty('application.version')})}"></span>
+    </div>
+
+	<script src="../../static/js/jquery.1.11.min.js" th:src="@{/js/jquery.1.11.min.js}"></script>
+	<script src="../../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../../static/js/lobibox/lobibox.min.js" th:src="@{/js/lobibox/lobibox.min.js}"></script>
+	<script src="../../static/js/lobibox/messageboxes.min.js" th:src="@{/js/lobibox/messageboxes.min.js}"></script>
+	<script src="../../static/js/lobibox/notifications.min.js" th:src="@{/js/lobibox/notifications.min.js}"></script>
+	
+    <!--*/--> 
+    
+    <th:block layout:fragment="script-content">
+    
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+
+    		$(document).ready(function(){
+    			$('#btnInfo').on('click', function(){
+    				Lobibox.notify('info', //AVAILABLE TYPES: "error", "info", "success", "warning"
+ 						{
+    						title:/*[[#{application.title}]]*/ "Info",
+ 						    msg: Lobibox.notify.DEFAULTS.soundPath + " " + /*[[${messageController}]]*/ "Lorem ipsum dolor sit amet byron frown"
+ 						});
+    				return false;
+    			});
+    			
+    			$('#btnSuccess').on('click', function(){
+    				Lobibox.notify('success', 
+ 						{
+							title:/*[[#{application.title}]]*/ "Success",
+ 						    msg: /*[[${messageController}]]*/ "Lorem ipsum dolor sit amet byron frown"
+ 						});
+    				return false;
+    			});
+    			
+    			$('#btnWarning').on('click', function(){
+    				Lobibox.notify('warning', 
+ 						{
+ 						    msg: /*[[${messageController}]]*/ "Lorem ipsum dolor sit amet byron frown"
+ 						});
+    				return false;
+    			});
+    			
+    			$('#btnError').on('click', function(){
+    				Lobibox.notify('error', 
+ 						{
+ 						    msg: /*[[${messageController}]]*/ "Lorem ipsum dolor sit amet byron frown"
+ 						});
+    				return false;
+    			});
+    		});
+		           
+		/*]]>*/
+		</script>
+		
+    </th:block>
+	
+</body>
+</html>
